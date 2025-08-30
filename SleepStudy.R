@@ -7,7 +7,7 @@ data = SleepStudy
 # Convert ClassYear to factor with labels
 data$ClassYear = factor(data$ClassYear, levels = 1:4, labels = c("Freshman", "Sophomore", "Junior", "Senior"))
 
-# Construct boxplot
+# Construct box plot
 windows()
 plot1 = boxplot(Drinks ~ ClassYear, data = data,
         main = "Alcoholic Drinks per Week by Class Standing",
@@ -22,7 +22,7 @@ plot1$stats
 # Convert Gender to character (0=female, 1=male)
 data$Gender = as.character(data$Gender)
 
-# Construct boxplot
+# Construct box plot
 windows()
 plot2 = boxplot(GPA ~ Gender, data = data,
         main = "Overall GPA by Gender",
@@ -45,11 +45,11 @@ FemaleSleep=subset(data, data$Gender=="0")
 
 alpha = 0.05
 
-# 2.a. 
+# 2.a. Testing the claim that the stress level for female and male students is different
 # Perform t-test
 t.test(FemaleSleep$StressScore, MaleSleep$StressScore, alternative= "two.sided", conf.level=1-alpha)
 
-# 2.b. 
+# 2.b. Testing the claim that female students, on average, sleep more on weekdays than their male counterparts
 # Perform t-test
 t.test(FemaleSleep$WeekdaySleep, MaleSleep$WeekdaySleep, alternative="greater", conf.level=1-alpha)
 
@@ -57,7 +57,7 @@ t.test(FemaleSleep$WeekdaySleep, MaleSleep$WeekdaySleep, alternative="greater", 
 
 ### Simple Linear Regression:
 
-# 3 Stress Score Predicted by Anxiety Score
+# 3. Stress Score Predicted by Anxiety Score
 
 # Construct scatter plot
 windows()
@@ -92,7 +92,7 @@ summary(model_slr2)
 
 ### Multiple Linear Regression:
 
-# 5. Stress Score Predicted by Happiness, Weekday Sleep and Weekend Sleep
+# 5. Stress Score Predicted by Happiness, Weekday Sleep, and Weekend Sleep
 
 # Create model
 model_mlr1 = lm(StressScore ~ Happiness + WeekdaySleep + WeekendSleep, data = data)
@@ -112,7 +112,7 @@ summary(model_mlr2)
 
 #############################################
 
-### Chi Square for Categorical Variables:
+### Chi-Square for Categorical Variables:
 
 # 7. Association between Gender and Alcohol Use
 
@@ -186,8 +186,7 @@ print(result)
 one.way1 = aov(data$GPA ~ data$ClassYear)
 summary(one.way1)
 
-#If the ANOVA results are significant, then Perform Tukey's HSD test for post-hoc analysis 
-
+#If the ANOVA results are significant, then perform Tukey's HSD test for post-hoc analysis 
 tukey_result = TukeyHSD(one.way1)
 print(tukey_result)
 
@@ -234,8 +233,7 @@ print(result)
 one.way2 = aov(data$GPA ~ data$AlcoholUse)
 summary(one.way2)
 
-#If the ANOVA results are significant, then Perform Tukey's HSD test for post-hoc analysis 
-
+#If the ANOVA results are significant, then perform Tukey's HSD test for post-hoc analysis
 tukey_result = TukeyHSD(one.way1)
 print(tukey_result)
 
